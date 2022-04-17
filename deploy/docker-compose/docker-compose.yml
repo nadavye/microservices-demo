@@ -96,7 +96,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
   shipping:
-    image: shipping:0.0.0
+    image: shipping:test
     hostname: shipping
     restart: always
     cap_drop:
