@@ -12,7 +12,7 @@ services:
     image: weaveworksdemos/edge-router:0.1.1
     ports:
       - '80:80'
-      - '8082:8080'
+      - '8080:8080'
     cap_drop:
       - all
     cap_add:
@@ -96,18 +96,18 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
   shipping:
-    image: shipping:test
+    image: weaveworksdemos/shipping:0.4.8
     hostname: shipping
     restart: always
     cap_drop:
       - all
     cap_add:
       - NET_BIND_SERVICE
+    read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
-    read_only: true
   queue-master:
     image: weaveworksdemos/queue-master:0.3.1
     hostname: queue-master
