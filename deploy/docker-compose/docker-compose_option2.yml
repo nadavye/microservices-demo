@@ -114,12 +114,9 @@ services:
     volumes:
       - /tmp/sealights_option2:/sealights
     entrypoint:
-      - /sealights/java_container.sh
-      - &&
-      - /usr/local/bin/java.sh
-      - -jar
-      - ./app.jar
-      - --port=80
+      - sh
+      - -c
+      - "/sealights/java_container.sh && /usr/local/bin/java.sh -jar ./app.jar --port=80"
   queue-master:
     image: weaveworksdemos/queue-master:0.3.1
     hostname: queue-master
