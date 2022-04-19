@@ -113,7 +113,7 @@ services:
       - SERVICE_NAME=microservices_shipping
     volumes:
       - /tmp/sealights_option2:/sealights
-    entrypoint:
+    command:
       - /sealights/java_container.sh && /usr/local/bin/java.sh -jar ./app.jar --port=80
   queue-master:
     image: weaveworksdemos/queue-master:0.3.1
