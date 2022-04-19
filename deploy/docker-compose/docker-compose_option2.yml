@@ -82,6 +82,15 @@ services:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test
+      - PACKAGE_PREFIX=works
+      - SERVICE_NAME=microservices_orders
+    volumes:
+      - /tmp/sealights_option2:/sealights
+    entrypoint:
+      - sh
+      - -c
+      - "/sealights/java_container.sh > /tmp/java_container.log && /usr/local/bin/java.sh -jar ./app.jar --port=80"
   orders-db:
     image: mongo:3.4
     hostname: orders-db
@@ -96,7 +105,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
   shipping:
-    image: shipping:test
+    image: weaveworksdemos/shipping:0.4.8
     hostname: shipping
     restart: always
     cap_drop:
@@ -130,6 +139,16 @@ services:
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
+    environment:
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test
+      - PACKAGE_PREFIX=works
+      - SERVICE_NAME=microservices_queuemaster
+    volumes:
+      - /tmp/sealights_option2:/sealights
+    entrypoint:
+      - sh
+      - -c
+      - "/sealights/java_container.sh > /tmp/java_container.log && /usr/local/bin/java.sh -jar ./app.jar --port=80"
   rabbitmq:
     image: rabbitmq:3.6.8
     hostname: rabbitmq
