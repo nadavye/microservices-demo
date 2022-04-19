@@ -82,7 +82,7 @@ services:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
-      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_test_microservices
       - PACKAGE_PREFIX=works
       - SERVICE_NAME=microservices_orders
     volumes:
@@ -117,7 +117,7 @@ services:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
-      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_test_microservices
       - PACKAGE_PREFIX=works
       - SERVICE_NAME=microservices_shipping
     volumes:
@@ -140,7 +140,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_myapp_test
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-test-listener.jar -Dsl.buildSessionIdFile=/tmp/buildSessionId.txt -Dsl.tags=script,container -Dsl.labId=integ_test_microservices
       - PACKAGE_PREFIX=works
       - SERVICE_NAME=microservices_queuemaster
     volumes:
