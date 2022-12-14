@@ -81,8 +81,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.token=${SL_TOKEN} -Dsl.appName=microservices_orders -Dsl.tags=script,container -Dsl.labId=integ_test_microservices
-      - PACKAGE_PREFIX=works
+      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.token=${SL_TOKEN} -Dsl.appName=microservices_orders -Dsl.tags=script,container -Dsl.labId=integ_test_microservices sl.includes=works
     volumes:
       - /tmp/sealights_option2:/sealights
   orders-db:
