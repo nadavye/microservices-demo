@@ -41,7 +41,7 @@ spec:
         - name: sl.appName
           value: microservices_carts
         - name: sl.buildName
-          value: ${BUILD_NUMBER}
+          value: k8s_${BUILD_NUMBER}
         - name: sl.tags
           value: k8s_sc
         - name: sl.labId
@@ -382,7 +382,7 @@ spec:
         - name: sl.appName
           value: microservices_orders
         - name: sl.buildName
-          value: ${BUILD_NUMBER}
+          value: k8s_${BUILD_NUMBER}
         - name: sl.tags
           value: k8s_sc
         - name: sl.labId
@@ -604,7 +604,7 @@ spec:
         - name: sl.appName
           value: microservices_queuemaster
         - name: sl.buildName
-          value: ${BUILD_NUMBER}
+          value: k8s_${BUILD_NUMBER}
         - name: sl.tags
           value: k8s_sc
         - name: sl.labId
@@ -807,7 +807,7 @@ spec:
         - name: sl.appName
           value: microservices_shipping
         - name: sl.buildName
-          value: ${BUILD_NUMBER}
+          value: k8s_${BUILD_NUMBER}
         - name: sl.tags
           value: k8s_sc
         - name: sl.labId
