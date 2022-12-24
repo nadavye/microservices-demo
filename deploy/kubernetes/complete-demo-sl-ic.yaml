@@ -41,9 +41,7 @@ spec:
         - name: sl.appName
           value: microservices_carts
         - name: sl.buildName
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid
+          value: ${BUILD_NUMBER}
         - name: sl.tags
           value: k8s_sc
         - name: sl.labId
@@ -364,12 +362,35 @@ spec:
       labels:
         name: orders
     spec:
+      initContainers:
+      - name: java-agent-ftv
+        image: java-agent-ftv:latest
+        imagePullPolicy: Never
+        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        volumeMounts:
+          - mountPath: /sealights
+            name: java-agent-ftv-file
       containers:
       - name: orders
         image: weaveworksdemos/orders:0.4.7
         env:
-         - name: JAVA_OPTS
-           value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+        - name: sl.token
+          valueFrom:
+            secretKeyRef:
+              name: sealights
+              key: SL_TOKEN
+        - name: sl.appName
+          value: microservices_orders
+        - name: sl.buildName
+          value: ${BUILD_NUMBER}
+        - name: sl.tags
+          value: k8s_sc
+        - name: sl.labId
+          value: integ_test_microservices
+        - name: sl.includes
+          value: works*
+        - name: JAVA_OPTS
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
         resources:
           limits:
             cpu: 500m
@@ -391,10 +412,14 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume
+        - mountPath: /sealights
+          name: java-agent-ftv-file
       volumes:
-        - name: tmp-volume
-          emptyDir:
-            medium: Memory
+      - name: tmp-volume
+        emptyDir:
+          medium: Memory
+      - name: java-agent-ftv-file
+        emptyDir: {}
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
@@ -559,12 +584,35 @@ spec:
       labels:
         name: queue-master
     spec:
+      initContainers:
+      - name: java-agent-ftv
+        image: java-agent-ftv:latest
+        imagePullPolicy: Never
+        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        volumeMounts:
+          - mountPath: /sealights
+            name: java-agent-ftv-file
       containers:
       - name: queue-master
         image: weaveworksdemos/queue-master:0.3.1
         env:
-         - name: JAVA_OPTS
-           value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+        - name: sl.token
+          valueFrom:
+            secretKeyRef:
+              name: sealights
+              key: SL_TOKEN
+        - name: sl.appName
+          value: microservices_queuemaster
+        - name: sl.buildName
+          value: ${BUILD_NUMBER}
+        - name: sl.tags
+          value: k8s_sc
+        - name: sl.labId
+          value: integ_test_microservices
+        - name: sl.includes
+          value: works*
+        - name: JAVA_OPTS
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
         resources:
           limits:
             cpu: 300m
@@ -574,6 +622,12 @@ spec:
             memory: 300Mi
         ports:
         - containerPort: 80
+        volumeMounts:
+        - mountPath: /sealights
+          name: java-agent-ftv-file
+      volumes:
+      - name: java-agent-ftv-file
+        emptyDir: {}
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
@@ -731,14 +785,37 @@ spec:
       labels:
         name: shipping
     spec:
+      initContainers:
+      - name: java-agent-ftv
+        image: java-agent-ftv:latest
+        imagePullPolicy: Never
+        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        volumeMounts:
+          - mountPath: /sealights
+            name: java-agent-ftv-file
       containers:
       - name: shipping
         image: weaveworksdemos/shipping:0.4.8
         env:
-         - name: ZIPKIN
-           value: zipkin.jaeger.svc.cluster.local
-         - name: JAVA_OPTS
-           value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+        - name: ZIPKIN
+          value: zipkin.jaeger.svc.cluster.local
+        - name: sl.token
+          valueFrom:
+            secretKeyRef:
+              name: sealights
+              key: SL_TOKEN
+        - name: sl.appName
+          value: microservices_shipping
+        - name: sl.buildName
+          value: ${BUILD_NUMBER}
+        - name: sl.tags
+          value: k8s_sc
+        - name: sl.labId
+          value: integ_test_microservices
+        - name: sl.includes
+          value: works*
+        - name: JAVA_OPTS
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
         resources:
           limits:
             cpu: 300m
@@ -760,10 +837,14 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume
+        - mountPath: /sealights
+          name: java-agent-ftv-file
       volumes:
-        - name: tmp-volume
-          emptyDir:
-            medium: Memory
+      - name: tmp-volume
+        emptyDir:
+          medium: Memory
+      - name: java-agent-ftv-file
+        emptyDir: {}
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
