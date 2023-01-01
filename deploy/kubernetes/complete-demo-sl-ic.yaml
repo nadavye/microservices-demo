@@ -25,7 +25,7 @@ spec:
       - name: java-agent-ftv
         image: java-agent-ftv:latest
         imagePullPolicy: Never
-        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        command: ["/bin/sh", "-c", "cp /download/sl-cd-agent.jar /sealights"]
         volumeMounts:
           - mountPath: /sealights
             name: java-agent-ftv-file
@@ -48,8 +48,10 @@ spec:
           value: integ_test_microservices
         - name: sl.includes
           value: works*
+        - JAVA_TOOL_OPTIONS
+          value: -javaagent:/sealights/sl-cd-agent.jar
         - name: JAVA_OPTS
-          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
         resources:
           limits:
             cpu: 300m
@@ -366,7 +368,7 @@ spec:
       - name: java-agent-ftv
         image: java-agent-ftv:latest
         imagePullPolicy: Never
-        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        command: ["/bin/sh", "-c", "cp /download/sl-cd-agent.jar /sealights"]
         volumeMounts:
           - mountPath: /sealights
             name: java-agent-ftv-file
@@ -389,8 +391,10 @@ spec:
           value: integ_test_microservices
         - name: sl.includes
           value: works*
+        - JAVA_TOOL_OPTIONS
+          value: -javaagent:/sealights/sl-cd-agent.jar
         - name: JAVA_OPTS
-          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
         resources:
           limits:
             cpu: 500m
@@ -588,7 +592,7 @@ spec:
       - name: java-agent-ftv
         image: java-agent-ftv:latest
         imagePullPolicy: Never
-        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        command: ["/bin/sh", "-c", "cp /download/sl-cd-agent.jar /sealights"]
         volumeMounts:
           - mountPath: /sealights
             name: java-agent-ftv-file
@@ -611,8 +615,10 @@ spec:
           value: integ_test_microservices
         - name: sl.includes
           value: works*
+        - JAVA_TOOL_OPTIONS
+          value: -javaagent:/sealights/sl-cd-agent.jar
         - name: JAVA_OPTS
-          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
         resources:
           limits:
             cpu: 300m
@@ -789,7 +795,7 @@ spec:
       - name: java-agent-ftv
         image: java-agent-ftv:latest
         imagePullPolicy: Never
-        command: ["/bin/sh", "-c", "cp /download/java-agent-ftv-4.0.0-SNAPSHOT.jar /sealights"]
+        command: ["/bin/sh", "-c", "cp /download/sl-cd-agent.jar /sealights"]
         volumeMounts:
           - mountPath: /sealights
             name: java-agent-ftv-file
@@ -814,8 +820,10 @@ spec:
           value: integ_test_microservices
         - name: sl.includes
           value: works*
+        - JAVA_TOOL_OPTIONS
+          value: -javaagent:/sealights/sl-cd-agent.jar
         - name: JAVA_OPTS
-          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar
+          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
         resources:
           limits:
             cpu: 300m
