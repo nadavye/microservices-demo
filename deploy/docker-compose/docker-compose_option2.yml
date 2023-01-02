@@ -55,7 +55,8 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.token=${SL_TOKEN} -Dsl.appName=microservices_orders -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
+      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.tokenFile=/sealights/sltoken.txt -Dsl.appName=microservices_orders -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
     volumes:
       - /tmp/sealights_option2:/sealights
   carts-db:
@@ -83,7 +84,8 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.token=${SL_TOKEN} -Dsl.appName=microservices_orders -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
+      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false 
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.tokenFile=/sealights/sltoken.txt -Dsl.appName=microservices_orders -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
     volumes:
       - /tmp/sealights_option2:/sealights
   orders-db:
@@ -111,7 +113,8 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.token=${SL_TOKEN} -Dsl.appName=microservices_shipping -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
+      - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false 
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.tokenFile=/sealights/sltoken.txt -Dsl.appName=microservices_shipping -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
     volumes:
       - /tmp/sealights_option2:/sealights
   queue-master:
@@ -128,7 +131,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
-      - JAVA_OPTS= -javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.token=${SL_TOKEN} -Dsl.appName=microservices_queuemaster -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
+      - JAVA_OPTS=-javaagent:/sealights/java-agent-ftv-4.0.0-SNAPSHOT.jar -Dsl.tokenFile=/sealights/sltoken.txt -Dsl.appName=microservices_queuemaster -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
     volumes:
       - /tmp/sealights_option2:/sealights
   rabbitmq:
