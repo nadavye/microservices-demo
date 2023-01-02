@@ -56,7 +56,7 @@ services:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
-      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-cd-agent.jar -Dsl.tokenFile=/sealights/sltoken.txt -Dsl.appName=microservices_orders -Dsl.buildName=dc_${BUILD_NUMBER} -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
+      - JAVA_TOOL_OPTIONS=-javaagent:/sealights/sl-cd-agent.jar -Dsl.tokenFile=/sealights/sltoken.txt -Dsl.appName=microservices_carts -Dsl.buildName=dc_${BUILD_NUMBER} -Dsl.tags=script,container -Dsl.labId=integ_test_microservices -Dsl.includes=works*
     volumes:
       - /tmp/sealights_option2:/sealights
   carts-db:
