@@ -44,7 +44,7 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_DATABASE=socksdb
   carts:
-    image: carts:local
+    image: weaveworksdemos/carts:0.4.8
     hostname: carts
     restart: always
     cap_drop:
