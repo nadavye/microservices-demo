@@ -73,7 +73,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
   orders:
-    image: weaveworksdemos/orders:0.4.7
+    image: orders:local
     hostname: orders
     restart: always
     cap_drop:
@@ -102,7 +102,7 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
   shipping:
-    image: weaveworksdemos/shipping:0.4.8
+    image: shipping:local
     hostname: shipping
     restart: always
     cap_drop:
@@ -118,7 +118,7 @@ services:
     volumes:
       - /tmp/sealights_option2:/sealights
   queue-master:
-    image: weaveworksdemos/queue-master:0.3.1
+    image: queue-master:local
     hostname: queue-master
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
